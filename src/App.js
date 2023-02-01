@@ -1,12 +1,23 @@
-import { useState, useEffect } from 'react';
-import Timer from "./components/Timer";
+import { useState, useRef } from 'react';
 
 function App() {
-    const [showTimer, setShowTimer] = useState(false);
+    const [count, setCount] = useState(0);
+    const countRef = useRef(0);
+
+    const increaseCountState = () => {
+        setCount(count + 1);
+    };
+
+    const increaseCountRef = () => {
+        countRef.current = countRef.current + 1;
+    };
+
     return (
         <div>
-            {showTimer && <Timer />}
-            <button onClick = {() => setShowTimer(!showTimer)}>Timer</button>
+            <p>State: {count}</p>
+            <p>Ref: {countRef.current} </p>
+            <button onClick={increaseCountState}>State 증가</button>
+            <button onClick={increaseCountRef}>Ref 증가</button>
         </div>
     );
 }
