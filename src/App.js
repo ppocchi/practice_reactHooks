@@ -1,21 +1,12 @@
 import { useState, useEffect } from 'react';
+import Timer from "./components/Timer";
 
 function App() {
-    const [count, setCount] = useState(1);
-
-    const handleCountUpdate = () => {
-        setCount(count + 1);
-    }
-
-    //마운팅 + count 변화할 때 실행됨
-    useEffect(() => {
-        console.log('count 변화');
-    }, [count]);
-
+    const [showTimer, setShowTimer] = useState(false);
     return (
         <div>
-            <button onClick={handleCountUpdate}>Update</button>
-            <span>count: {count}</span>
+            {showTimer && <Timer />}
+            <button onClick = {() => setShowTimer(!showTimer)}>Timer</button>
         </div>
     );
 }
