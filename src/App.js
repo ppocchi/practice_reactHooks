@@ -1,32 +1,21 @@
-import { useState } from 'react';
-
-const initalVale = () => {
-    return ['홍길동'];
-}
+import { useState, useEffect } from 'react';
 
 function App() {
-    const [names, setNames] = useState(() => {
-        return initalVale();
-    });
-    const [input, setInput] = useState('');
+    const [count, setCount] = useState(1);
 
-    const handleInputChange = (e) => {
-        setInput(e.target.value);
-    };
+    const handleCountUpdate = () => {
+        setCount(count + 1);
+    }
 
-    const handleUpload = () => {
-        setNames((prevState) => {
-            return [input, ...prevState];
-        });
-    };
+    //마운팅 + count 변화할 때 실행됨
+    useEffect(() => {
+        console.log('count 변화');
+    }, [count]);
 
     return (
         <div>
-            <input type="text" value={input} onChange={handleInputChange} />
-            <button onClick={handleUpload}>Upload</button>
-            {names.map((name, idx)=> {
-                return <p key={idx}>{name}</p>;
-            })}
+            <button onClick={handleCountUpdate}>Update</button>
+            <span>count: {count}</span>
         </div>
     );
 }
