@@ -1,25 +1,20 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 function App() {
-    const [count, setCount] = useState(0);
-    const countRef = useRef(0);
+    const [count, setCount] = useState(1);
+    const renderCount = useRef(0);
 
-    const increaseCountState = () => {
-        setCount(count + 1);
-    };
-
-    const increaseCountRef = () => {
-        countRef.current = countRef.current + 1;
-    };
+    useEffect(() => {
+        renderCount.current += 1;
+        console.log('렌더링 수: ', renderCount.current);
+    });
 
     return (
         <div>
-            <p>State: {count}</p>
-            <p>Ref: {countRef.current} </p>
-            <button onClick={increaseCountState}>State 증가</button>
-            <button onClick={increaseCountRef}>Ref 증가</button>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>증가</button>
         </div>
     );
-}
+};
 
 export default App;
